@@ -3,6 +3,8 @@
 Created a virtual Clock using HTML, CSS and Javascript.  
 Following 'Online Tutorials', 'Javascript Clock | CSS Neumorphism Working Analog Clock UI Design' video tutorial.
 
+Project page: [stefanborghys.github.io/clock](https://stefanborghys.github.io/clock)
+
 ## :information_source: Sources
 Javascript Clock tutorial:  
 src: [Javascript Clock | CSS Neumorphism Working Analog Clock UI Design](https://www.youtube.com/watch?v=weZFfrjF-k4)
