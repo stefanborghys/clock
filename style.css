@@ -1,0 +1,226 @@
+/*
+Javascript Clock
+src: https://www.youtube.com/watch?v=weZFfrjF-k4
+
+Documentation:
+src: https://www.w3schools.com/css
+*/
+
+/*
+Following markup is applied to all elements.
+ */
+* {
+    /*
+    Used to create space around elements, outside of any defined borders.
+     */
+    margin: 0;
+    /*
+    Used to generate space around an element's content, inside of any defined borders.
+     */
+    padding: 0;
+    /*
+    The box-sizing property allows to include the padding and border in an element's total width and height.
+
+    By default, the width and height of an element is calculated like this:
+    - width + padding + border = actual width of an element
+    - height + padding + border = actual height of an element
+
+    This means: When you set the width/height of an element,
+    the element often appears bigger than you have set
+    (because the element's border and padding are added to the element's specified width/height).
+
+    If you set 'box-sizing: border-box;' on an element, padding and border are included in the width and height.
+     */
+    box-sizing: border-box;
+}
+
+body {
+    /*
+    Displays an element as a block-level flex container.
+     */
+    display: flex;
+    /*
+    Aligns the flexible container's items when the items do not use all available space on the main-axis (horizontally).
+
+    - 'center' :  Aligns the flex items at the center of the container.
+
+    Positions the clock face in the horizontal center of the body.
+     */
+    justify-content: center;
+    /*
+    Specifies the default alignment for items inside the flexible container.
+
+    - 'center' :  Center's the alignments for all the items of the flexible <body> element.
+
+    Positions the clock face in the vertical center of the body.
+     */
+    align-items: center;
+    /*
+    - 'vh' :  Relative to 1% of the height of the viewport.
+
+    The viewport = the browser window size.
+    If the viewport is 50cm high, 1vh = 0.5cm.
+     */
+    min-height: 100vh;
+    background: #091921;
+}
+
+/* Clock Face */
+.clock {
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(clock_face.png);
+    /*
+    Specifies the size of the background images.
+
+    - 'cover' : Resize the background image to cover the entire container,
+                even if it has to stretch the image or cut a little bit off one of the edges.
+     */
+    background-size: cover;
+    /*
+    This is a shorthand property for:
+    - 'border-width'
+    - 'border-style' (required)
+    - 'border-color'
+     */
+    border: 4px solid #091921;
+    /*
+    Attaches one or more shadows to an element.
+
+    'box-shadow': none|h-offset v-offset blur spread color |inset|initial|inherit;
+
+    - 'none' :      Default value. No shadow is displayed.
+    - 'h-offset' :  Required. The horizontal offset of the shadow.
+                    A positive value puts the shadow on the right side of the box,
+                    a negative value puts the shadow on the left side of the box.
+    - 'v-offset' :	Required. The vertical offset of the shadow.
+                    A positive value puts the shadow below the box,
+                    a negative value puts the shadow above the box.
+    - 'blur' :      Optional. The blur radius.
+                    The higher the number, the more blurred the shadow will be.
+    - 'spread' : 	Optional. The spread radius.
+                    A positive value increases the size of the shadow,
+                    a negative value decreases the size of the shadow.
+    - 'color' :     Optional. The color of the shadow.
+                    The default value is the text color.
+    - 'inset' :     Optional. Changes the shadow from an outer shadow (outset)
+                    to an inner shadow.
+    - 'initial' :   Sets this property to its default value.
+    - 'inherit' :   Inherits this property from its parent element.
+
+    To attach more than one shadow to an element, add a comma-separated list of shadows.
+     */
+    box-shadow: /* Draws a shadow above the clock. */ 0px -15px 15px rgba(255, 255, 255, 0.05),
+        /* Draws a shadow inside the clock on the bottom. */ 0px -15px 15px rgba(255, 255, 255, 0.05) inset,
+        /* Draws a shadow below the clock. */ 0px 15px 15px rgba(0, 0, 0, 0.05),
+        /* Draws a shadow inside the clock on the top. */ 0px 15px 15px rgba(0, 0, 0, 0.05) inset;
+    /*
+    Defines the radius of the element's corners.
+
+    A single value is applied to all corners. Allowing to round them equally.
+    In this case creating a circle of the initially defined box!
+     */
+    border-radius: 50%;
+}
+
+/* Center dot */
+.clock:before {
+    /*
+    Used with the ::before and ::after pseudo-elements, to insert generated content.
+     */
+    content: '';
+    /*
+    Specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).
+
+    - 'absolute' :  The element is positioned relative to its first positioned (not static) ancestor element.
+     */
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+    /*
+    Specifies the stack order of an element.
+
+    An element with greater stack order is always in front of an element with a lower stack order.
+
+    Note: z-index only works on positioned elements
+    (position: absolute, position: relative, position: fixed, or position: sticky).
+
+    Setting the index to 10000 guarantees that the dot will always be on top of any other element.
+     */
+    z-index: 10000;
+}
+
+.clock .hour,
+.clock .minute,
+.clock .second {
+    position: absolute;
+}
+
+.clock .hour, .hr {
+    width: 160px;
+    height: 160px;
+}
+
+.clock .minute, .mn {
+    width: 190px;
+    height: 190px;
+}
+
+.clock .second, .sc {
+    width: 230px;
+    height: 230px;
+}
+
+.hr, .mn, .sc {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Hour hand */
+.hr:before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 80px;
+    background: #ff105e;
+    z-index: 10;
+    /*
+    Defines the radius of the element's corners.
+
+    Four values - border-radius: 15px 50px 30px 5px;
+    - first value applies to top-left corner
+    - second value applies to top-right corner
+    - third value applies to bottom-right corner
+    - and fourth value applies to bottom-left corner
+     */
+    border-radius: 6px 6px 0px 0px;
+}
+
+/* Minute hand */
+.mn:before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 90px;
+    background: #ffffff;
+    z-index: 11;
+    border-radius: 6px 6px 0px 0px;
+}
+
+/* Second hand */
+.sc:before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 150px;
+    background: #ffffff;
+    z-index: 12;
+    border-radius: 6px 6px 0px 0px;
+}

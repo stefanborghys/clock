@@ -1,0 +1,67 @@
+<!--
+Javascript Clock
+src: https://www.youtube.com/watch?v=weZFfrjF-k4
+
+Documentation:
+src: https://www.w3schools.com/js
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="clock">
+    <div class="hour">
+        <div class="hr" id="hr">
+        </div>
+    </div>
+    <div class="minute">
+        <div class="mn" id="mn">
+        </div>
+    </div>
+    <div class="second">
+        <div class="sc" id="sc">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    const deg = 6;
+
+    // Select hands by id:
+    const hr = document.querySelector('#hr');
+    const mn = document.querySelector('#mn');
+    const sc = document.querySelector('#sc');
+
+    /*
+    Repeats a given function at every given time-interval.
+    setInterval(function, milliseconds) is a method of the HTML DOM Window object.
+
+    - first parameter : the function to be executed
+    - second parameter :    length of the time-interval between each execution
+     */
+    setInterval(() => {
+        let day = new Date();
+        // Number of degrees:
+        // - for the current hour
+        let hh = day.getHours() * 30; // 12 (max hours) * 30 = 360°
+        // - for the current minute
+        let mm = day.getMinutes() * deg; // 60 (max minutes) * 6 = 360°
+        // - for the current second
+        let ss = day.getSeconds() * deg; // 60 (max seconds) * 6 = 360°
+
+        /*
+        Applies a 2D or 3D transformation to an element.
+        This property allows you to rotate, scale, move, skew, etc., elements.
+
+        - 'rotateZ(angle)' :    Defines a 3D rotation along the Z-axis
+         */
+        hr.style.transform = `rotateZ(${(hh) + (mm / 12)}deg)`; // degree hour(s) + (degree minute / 12)
+        mn.style.transform = `rotateZ(${mm}deg)`; // degree minute(s)
+        sc.style.transform = `rotateZ(${ss}deg)`; // degree second(s)
+    }, 1000);
+</script>
+</body>
+</html>
